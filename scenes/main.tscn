@@ -1,0 +1,145 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.12, 0.16, 1)
+mouse_filter = 2
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="List" type="VBoxContainer" parent="Menu/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="Play" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoardWrap" type="CenterContainer" parent="Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Board" type="Control" parent="Play/BoardWrap"]
+layout_mode = 2
+
+[node name="UI" type="CanvasLayer" parent="Play"]
+
+[node name="HUD" type="Label" parent="Play/UI"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 240.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "得分 0"
+
+[node name="Back" type="Button" parent="Play/UI"]
+offset_left = 248.0
+offset_top = 8.0
+offset_right = 348.0
+offset_bottom = 36.0
+text = "选关"
+
+[node name="Shuffle" type="Button" parent="Play/UI"]
+offset_left = 248.0
+offset_top = 40.0
+offset_right = 348.0
+offset_bottom = 68.0
+text = "洗牌"
+
+[node name="Hint" type="Button" parent="Play/UI"]
+offset_left = 248.0
+offset_top = 72.0
+offset_right = 348.0
+offset_bottom = 100.0
+text = "提示"
+
+[node name="PathLine" type="Line2D" parent="Play/UI"]
+z_index = 10
+width = 3.0
+
+[node name="Overlay" type="ColorRect" parent="Play/UI"]
+visible = false
+offset_right = 360.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 0.62)
+mouse_filter = 0
+
+[node name="VBox" type="VBoxContainer" parent="Play/UI/Overlay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -110.0
+offset_right = 140.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Msg" type="Label" parent="Play/UI/Overlay/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.45, 1)
+theme_override_font_sizes/font_size = 18
+text = "通关"
+horizontal_alignment = 1
+
+[node name="Retry" type="Button" parent="Play/UI/Overlay/VBox"]
+layout_mode = 2
+text = "再来一局"
+
+[node name="ToMenu" type="Button" parent="Play/UI/Overlay/VBox"]
+layout_mode = 2
+text = "返回选关"
