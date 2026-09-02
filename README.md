@@ -4,7 +4,7 @@
 
 主入口：`/games/link-game/`。
 
-界面资源还原自原版 `public/linkGame/`：`background.png`、`icon/icon_0.png`–`icon_20.png`、点击/消除音效。
+界面资源还原自原版 `public/linkGame/`：`background.png`、`icon/icon_0.png`–`icon_19.png`（去掉原 `icon_17` 后后面序号前移）、点击/消除音效。
 
 ```bash
 bash scripts/export-godot-game.sh link-game

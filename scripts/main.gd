@@ -3,7 +3,7 @@ extends Control
 
 const COLS := 8
 const ROWS := 8
-const TYPES := 21
+const TYPES := 20
 const TILE := 38.0
 const GAP := 4.0
 const GAME_DURATION := 300
