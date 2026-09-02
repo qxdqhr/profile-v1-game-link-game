@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/bg/background.png" id="2_bg"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -11,14 +12,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.08, 0.12, 0.16, 1)
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
 mouse_filter = 2
 
 [node name="Menu" type="Control" parent="."]
@@ -34,17 +37,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 24.0
-offset_right = -20.0
-offset_bottom = -24.0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="List" type="VBoxContainer" parent="Menu/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="Play" type="Control" parent="."]
 visible = false
@@ -55,67 +59,148 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoardWrap" type="CenterContainer" parent="Play"]
+[node name="Layout" type="VBoxContainer" parent="Play"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -120.0
-offset_right = 160.0
-offset_bottom = 220.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="Board" type="Control" parent="Play/BoardWrap"]
+[node name="HUD" type="PanelContainer" parent="Play/Layout"]
 layout_mode = 2
 
-[node name="UI" type="CanvasLayer" parent="Play"]
+[node name="HudInner" type="VBoxContainer" parent="Play/Layout/HUD"]
+layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="HUD" type="Label" parent="Play/UI"]
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 240.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(0.92, 0.96, 1, 1)
-theme_override_font_sizes/font_size = 13
-text = "得分 0"
+[node name="Title" type="Label" parent="Play/Layout/HUD/HudInner"]
+layout_mode = 2
+text = "葱韵环京连连看"
+horizontal_alignment = 1
 
-[node name="Back" type="Button" parent="Play/UI"]
-offset_left = 248.0
-offset_top = 8.0
-offset_right = 348.0
-offset_bottom = 36.0
+[node name="Credit" type="Label" parent="Play/Layout/HUD/HudInner"]
+layout_mode = 2
+text = "Created by 焦糖布丁忆梦梦 皋月朔星"
+horizontal_alignment = 1
+
+[node name="Stats" type="HBoxContainer" parent="Play/Layout/HUD/HudInner"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ScoreCard" type="PanelContainer" parent="Play/Layout/HUD/HudInner/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreCol" type="VBoxContainer" parent="Play/Layout/HUD/HudInner/Stats/ScoreCard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ScoreLab" type="Label" parent="Play/Layout/HUD/HudInner/Stats/ScoreCard/ScoreCol"]
+layout_mode = 2
+text = "得分"
+horizontal_alignment = 1
+
+[node name="ScoreVal" type="Label" parent="Play/Layout/HUD/HudInner/Stats/ScoreCard/ScoreCol"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ShuffleCard" type="PanelContainer" parent="Play/Layout/HUD/HudInner/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ShuffleCol" type="VBoxContainer" parent="Play/Layout/HUD/HudInner/Stats/ShuffleCard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ShuffleLab" type="Label" parent="Play/Layout/HUD/HudInner/Stats/ShuffleCard/ShuffleCol"]
+layout_mode = 2
+text = "剩余洗牌"
+horizontal_alignment = 1
+
+[node name="ShuffleVal" type="Label" parent="Play/Layout/HUD/HudInner/Stats/ShuffleCard/ShuffleCol"]
+layout_mode = 2
+text = "5"
+horizontal_alignment = 1
+
+[node name="TimeCard" type="PanelContainer" parent="Play/Layout/HUD/HudInner/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeCol" type="VBoxContainer" parent="Play/Layout/HUD/HudInner/Stats/TimeCard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TimeLab" type="Label" parent="Play/Layout/HUD/HudInner/Stats/TimeCard/TimeCol"]
+layout_mode = 2
+text = "剩余时间"
+horizontal_alignment = 1
+
+[node name="TimeVal" type="Label" parent="Play/Layout/HUD/HudInner/Stats/TimeCard/TimeCol"]
+layout_mode = 2
+text = "5:00"
+horizontal_alignment = 1
+
+[node name="TimeBar" type="ProgressBar" parent="Play/Layout/HUD/HudInner"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+max_value = 300.0
+value = 300.0
+show_percentage = false
+
+[node name="Controls" type="HBoxContainer" parent="Play/Layout/HUD/HudInner"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Back" type="Button" parent="Play/Layout/HUD/HudInner/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "选关"
 
-[node name="Shuffle" type="Button" parent="Play/UI"]
-offset_left = 248.0
-offset_top = 40.0
-offset_right = 348.0
-offset_bottom = 68.0
+[node name="Shuffle" type="Button" parent="Play/Layout/HUD/HudInner/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "洗牌"
 
-[node name="Hint" type="Button" parent="Play/UI"]
-offset_left = 248.0
-offset_top = 72.0
-offset_right = 348.0
-offset_bottom = 100.0
+[node name="Hint" type="Button" parent="Play/Layout/HUD/HudInner/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "提示"
 
-[node name="PathLine" type="Line2D" parent="Play/UI"]
+[node name="BoardSlot" type="CenterContainer" parent="Play/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BoardPanel" type="PanelContainer" parent="Play/Layout/BoardSlot"]
+layout_mode = 2
+
+[node name="Board" type="Control" parent="Play/Layout/BoardSlot/BoardPanel"]
+layout_mode = 2
+
+[node name="PathLine" type="Line2D" parent="Play/Layout/BoardSlot/BoardPanel/Board"]
 z_index = 10
 width = 3.0
+default_color = Color(0, 1, 0, 1)
 
-[node name="Overlay" type="ColorRect" parent="Play/UI"]
+[node name="Overlay" type="ColorRect" parent="Play"]
 visible = false
-offset_right = 360.0
-offset_bottom = 640.0
-color = Color(0, 0, 0, 0.62)
-mouse_filter = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
 
-[node name="VBox" type="VBoxContainer" parent="Play/UI/Overlay"]
+[node name="Card" type="PanelContainer" parent="Play/Overlay"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -127,19 +212,26 @@ offset_right = 140.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Play/Overlay/Card"]
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Msg" type="Label" parent="Play/UI/Overlay/VBox"]
+[node name="Msg" type="Label" parent="Play/Overlay/Card/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.92, 0.45, 1)
-theme_override_font_sizes/font_size = 18
 text = "通关"
 horizontal_alignment = 1
 
-[node name="Retry" type="Button" parent="Play/UI/Overlay/VBox"]
+[node name="Retry" type="Button" parent="Play/Overlay/Card/VBox"]
 layout_mode = 2
 text = "再来一局"
 
-[node name="ToMenu" type="Button" parent="Play/UI/Overlay/VBox"]
+[node name="ToMenu" type="Button" parent="Play/Overlay/Card/VBox"]
 layout_mode = 2
 text = "返回选关"
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+
+[node name="MatchSfx" type="AudioStreamPlayer" parent="."]
+volume_db = -4.0
